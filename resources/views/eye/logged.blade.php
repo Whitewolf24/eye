@@ -29,7 +29,7 @@
         <img src="{{ asset('img/logo.webp') }}" type="image/webp" alt="Life Spy Logo" id="logo" draggable="false">
         <div id="grid_flex">
             <div id="div_form">
-                <p class='msg'>You are logged in! Welcome!</p>
+                <p class='msg'>You are logged in! Welcome, {{ $email }}!</p>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" id="button_logout">Logout</button>
@@ -229,8 +229,11 @@
     }
 
     .msg {
+        bottom: 100%;
         color: white;
-        width: 200px;
+        position: relative;
+        text-align: center;
+        width: 33ch;
     }
 
     /* -------------------------------------------- */
@@ -244,10 +247,11 @@
         border: none;
         color: black;
         font-size: clamp(0.86rem, 1.11vw, 2rem);
-        height: clamp(2.5rem, 2.5vw, 5.5rem);
+        height: clamp(2rem, 2vw, 5rem);
         margin-bottom: 5%;
         margin-top: 8%;
-        width: clamp(5rem, 5vw, 7rem);
+        margin-inline: 39%;
+        width: clamp(4rem, 4vw, 4rem);
     }
 
     #button_logout:hover,
@@ -261,6 +265,16 @@
     /* -------------------------------------------- */
 
     /* 6.media */
+
+    @media only screen and (min-width: 1400px) {
+        #button_logout {
+            font-size: 16px;
+            /*   height: clamp(1.5rem, 1.5vw, 5rem); */
+            width: clamp(3rem, 4vw, 5rem);
+        }
+    }
+
+    /* //// */
 
     @media only screen and (max-width: 500px) and (min-width: 430px) {
         #form {
@@ -327,6 +341,10 @@
             width: clamp(20rem, 20vw, 20vh);
         }
 
+        .msg {
+            bottom: 35%;
+        }
+
         #button {
             height: clamp(2rem, 2vw, 2rem);
             margin-left: 38%;
@@ -335,7 +353,7 @@
 
         #button_logout {
             height: clamp(2rem, 2vw, 2rem);
-            margin-bottom: 3%;
+            margin-bottom: 35%;
             margin-left: 38%;
             width: clamp(4.5rem, 4.5vw, 4.5rem);
         }
@@ -356,6 +374,10 @@
             padding-top: 2%;
         }
 
+        .msg {
+            bottom: 25%;
+        }
+
         .input {
             padding-bottom: -15px;
             width: clamp(20rem, 20vw, 20vh);
@@ -363,7 +385,7 @@
 
         #button_logout {
             height: clamp(2rem, 2vw, 2rem);
-            margin-bottom: 3%;
+            margin-bottom: 45%;
             margin-left: 38%;
             width: clamp(4.5rem, 4.5vw, 4.5rem);
         }
@@ -374,7 +396,7 @@
     @media only screen and (max-height: 384px) and (min-height: 320px) {
         #logo {
             margin-top: clamp(9%, 9%, 9%);
-            height: 76%;
+            height: 80%;
             width: 25%;
         }
 
@@ -389,6 +411,10 @@
             width: clamp(20rem, 20vw, 20vh);
         }
 
+        .msg {
+            bottom: 30%;
+        }
+
         #button {
             height: clamp(2rem, 2vw, 2rem);
             margin-bottom: 1%;
@@ -398,7 +424,7 @@
 
         #button_logout {
             height: clamp(2rem, 2vw, 2rem);
-            margin-bottom: 3%;
+            margin-bottom: 30%;
             margin-left: 38%;
             width: clamp(4.5rem, 4.5vw, 4.5rem);
         }

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -15,26 +16,32 @@ class AuthController extends Controller
     {
         // Validate input with stronger rules
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => [
                 'required',
-                'min:8',
+                'min:8', // Make sure password is at least 8 characters
                 function ($attribute, $value, $fail) {
                     // Check for Greek characters
                     if (preg_match('/[α-ωΑ-Ωά-ώΆ-Ώ]/', $value)) {
                         return $fail('Your password cannot contain Greek characters.');
                     }
 
-                    // Check for other password requirements (at least one number, uppercase, lowercase, and symbol)
+                    // Check for at least one letter (either uppercase or lowercase)
                     if (!preg_match('/[a-zA-Z]/', $value)) {
                         return $fail('Your password must contain at least one English letter.');
                     }
+
+                    // Check for at least one number
                     if (!preg_match('/[0-9]/', $value)) {
                         return $fail('Your password must contain at least one number.');
                     }
+
+                    // Check for at least one uppercase letter
                     if (!preg_match('/[A-Z]/', $value)) {
                         return $fail('Your password must contain at least one uppercase letter.');
                     }
+
+                    // Check for at least one symbol
                     if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $value)) {
                         return $fail('Your password must contain at least one symbol.');
                     }
@@ -49,7 +56,11 @@ class AuthController extends Controller
             // If the user exists, log them in instead of creating a new user
             if (Hash::check($request->password, $existingUser->password)) {
                 Auth::login($existingUser);
-                return redirect()->route('logged');  // Redirect to the logged-in page
+
+                // Create a cookie 'oreo' for the user (expires in 1 month)
+                $cookie = cookie('oreo', 'user_logged_in', 43200); // 43200 minutes = 1 month
+
+                return redirect()->route('logged')->withCookie($cookie);  // Redirect to the logged-in page
             } else {
                 // If the password does not match, return an error
                 return back()->withErrors([
@@ -67,9 +78,12 @@ class AuthController extends Controller
         // Log the user in after registration
         Auth::login($user);
 
-        // Redirect to the logged page after successful registration
-        return redirect()->route('eye.logged');
+        // Create a cookie 'oreo' for the newly registered user (expires in 1 month)
+        $cookie = cookie('oreo', 'user_logged_in', 43200);
+
+        return redirect()->route('logged')->withCookie($cookie);
     }
+
 
 
     // Login method
@@ -80,14 +94,16 @@ class AuthController extends Controller
 
         // Attempt login with provided credentials
         if (Auth::attempt([
-            'email' => $credentials['email'], // Use 'email' here
+            'email' => $credentials['email'],
             'password' => $credentials['password'],
         ])) {
-            // Regenerate the session to prevent session fixation
             $request->session()->regenerate();
 
-            // Redirect to the intended page (or default to dashboard)
-            return redirect()->intended('/dashboard');
+            // Create a cookie 'oreo' for the logged-in user that expires in one month
+            $cookie = cookie('oreo', 'user_logged_in', 43200);
+
+            // Redirect to the intended page (or default to /logged)
+            return redirect()->intended('/logged')->withCookie($cookie);
         }
 
         // If login fails, redirect back with an error
@@ -95,6 +111,7 @@ class AuthController extends Controller
             'email' => 'The provided credentials are incorrect.',
         ]);
     }
+
 
     // Logout method
     public function logout(Request $request)
@@ -106,7 +123,10 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // Redirect to the homepage with a success message
-        return redirect('/')->with('success', 'You have successfully logged out.');
+        // Delete the 'oreo' cookie
+        $cookie = Cookie::forget('oreo'); // This deletes the 'oreo' cookie
+
+        // Redirect to the homepage with a success message and the cookie removal
+        return redirect('/')->with('success', 'You have successfully logged out.')->withCookie($cookie);
     }
 }

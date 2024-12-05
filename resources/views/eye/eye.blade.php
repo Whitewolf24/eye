@@ -72,22 +72,49 @@
         </div>
 
         <!-- Display success or error messages -->
-        @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-        @elseif(session('error'))
+        @if (isset($error)) <!-- Display cookie error message -->
         <div class="alert alert-danger">
-            {{ session('error') }}
+            {{ $error }}
         </div>
         @endif
     </section>
 
+
+
+
+    <div id="cookie-info" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 5px; z-index: 1000; opacity: 1; transition: opacity 1s, transform 1s;">
+        <p style="margin: 0; font-size: 14px; text-align:center">We use cookies essential for login.</p>
+    </div>
+
+
+    <script>
+        window.addEventListener('load', () => {
+            const banner = document.getElementById('cookie-info');
+
+            // Show the banner
+            banner.style.display = 'block';
+
+            // Automatically minimize the banner after 5 seconds
+            setTimeout(() => {
+                banner.style.opacity = '0'; // Fade out
+                banner.style.transform = 'translateX(-50%) translateY(20px)'; // Move down slightly
+            }, 5000);
+
+            // Remove the banner from the DOM after the transition completes
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, 6000); // Match transition duration (5 seconds fade + 1 second buffer)
+        });
+    </script>
+
+
     <!-- jQuery and Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
+
 
 <style>
     /* 
