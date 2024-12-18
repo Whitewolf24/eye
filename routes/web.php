@@ -7,24 +7,36 @@ use Illuminate\Support\Facades\Cookie;
 use App\Http\Middleware\CheckOreoCookie;
 
 
-// Serve the 'eye.blade.php' view at the root ('/')
+// Serve the 'eye.blade.php' as root 
 Route::get('/', function () {
-    // Check if the 'oreo' cookie exists and has the value 'user_logged_in'
+    // if 'oreo' exists and has 'user_logged_in' redirect to the logged-in page
     if (Cookie::get('oreo') === 'user_logged_in') {
-        // Redirect to the logged-in page
         return redirect()->route('logged');
     }
-
-    // Otherwise, serve the eye view
     return view('eye.eye');
 });
 
 Route::post('/signup', [AuthController::class, 'register'])->name('signup');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/check-user', [AuthController::class, 'check_user']);
 
-// Logged-in page (protected)
-Route::get('/logged', function () {
+Route::get('/login', function () {
     $user = Auth::user();
+    if (!$user) {
+        return redirect('/')->withErrors(['auth' => 'You are not logged in.']);
+    }
+
+})->name('login'); 
+
+Route::get('/logged', function () {
+    if (!Cookie::get('oreo')) {
+        return redirect('/')->withErrors(['cookie' => 'You are not logged in.']);
+    }
+
+    $user = Auth::user();
+    if (!$user) {
+        return redirect('/')->withErrors(['auth' => 'You are not logged in.']);
+    }
     return view('eye.logged', ['email' => $user->email]);
-})->middleware([CheckOreoCookie::class, 'auth'])->name('logged');
+})->name('logged'); 
