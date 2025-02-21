@@ -36,9 +36,12 @@ class AuthController extends Controller
                 ->with('status', 'success')
                 ->with('message', 'Successfully logged in.')
                 ->withCookie($cookie);
-            } 
+            } else {
+                return redirect()->route('login')
+                    ->with('status', 'error')
+                    ->with('message', 'Invalid credentials. Please try again.');
+            }
         } else {
-
             $user = User::create([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -53,6 +56,20 @@ class AuthController extends Controller
             ->with('message', 'Successfully registered and logged in.')
             ->withCookie($cookie);
         }
+    }
+
+    public function check_user(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            return response()->json(['exists' => true]);
+        }
+
+        return response()->json(['exists' => false]);
     }
 
     public function logout(Request $request)

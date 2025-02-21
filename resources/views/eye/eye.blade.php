@@ -765,9 +765,14 @@
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                     },
                     success: function(response) {
-                        resolve(response.exists);
+                        if (response.exists) {
+                            resolve(true); // User exists
+                        } else {
+                            resolve(false); // User does not exist
+                        }
                     },
-                    error: function() {
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error: " + error);
                         reject(false);
                     }
                 });
