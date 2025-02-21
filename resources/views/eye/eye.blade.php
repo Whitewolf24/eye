@@ -799,6 +799,7 @@
                     if (response.status === "error") {
                         u($("#warning_incorrect_password"));
                     } else if (response.status === "success") {
+                        console.log("Successfully logged in:", response);
                         window.location.href = response.redirect_url || "/logged";
                     }
                 },

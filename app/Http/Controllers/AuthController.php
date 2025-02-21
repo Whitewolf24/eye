@@ -13,7 +13,40 @@ use Carbon\Carbon;
 
 class AuthController extends Controller
 {
+
     public function register(Request $request)
+    {
+        if (Auth::check() || Cookie::get('oreo') === 'user_logged_in') {
+            return redirect()->route('logged');
+        }
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            return redirect()->route('login')
+            ->with('status', 'error')
+            ->with('message', 'Email already exists. Please log in.');
+        }
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Auth::login($user);
+
+        $cookie = cookie()->make('oreo', 'user_logged_in', 43200, '/', null, true, true, false, 'Strict');
+
+        return redirect()->route('logged')
+        ->with('status', 'success')
+        ->with('message', 'Successfully registered and logged in.')
+        ->withCookie($cookie);
+    }
+
+    public function login(Request $request)
     {
         if (Auth::check() || Cookie::get('oreo') === 'user_logged_in') {
             return redirect()->route('logged');
@@ -24,39 +57,32 @@ class AuthController extends Controller
             'password' => 'required|min:8',
         ]);
 
+
         $user = User::where('email', $request->email)->first();
 
-        if ($user) {
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-                $request->session()->regenerate();
+        if (!$user) {
 
-                $cookie = cookie()->make('oreo', 'user_logged_in', 43200, '/', null, true, true, false, 'Strict');
+            return redirect()->route('register')
+            ->with('status', 'error')
+                ->with('message', 'Email not found. Please register.');
+        }
 
-                return redirect()->route('logged')
-                ->with('status', 'success')
-                ->with('message', 'Successfully logged in.')
-                ->withCookie($cookie);
-            } else {
-                return redirect()->route('login')
-                    ->with('status', 'error')
-                    ->with('message', 'Invalid credentials. Please try again.');
-            }
-        } else {
-            $user = User::create([
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-
-            Auth::login($user);
-
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $request->session()->regenerate();
             $cookie = cookie()->make('oreo', 'user_logged_in', 43200, '/', null, true, true, false, 'Strict');
 
             return redirect()->route('logged')
             ->with('status', 'success')
-            ->with('message', 'Successfully registered and logged in.')
+            ->with('message', 'Successfully logged in.')
             ->withCookie($cookie);
         }
+
+        return redirect()->route('login')
+            ->with('status', 'error')
+            ->with('message', 'Invalid credentials. Please try again.');
     }
+
+
 
     public function check_user(Request $request)
     {
