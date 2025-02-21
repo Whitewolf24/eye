@@ -51,7 +51,7 @@
         <div id="grid_flex">
             <form action="{{ route('signup') }}" id="form" method="POST">
                 @csrf
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <!--     <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
                 <div id="div_form">
                     <input class="input" id="email" name="email" placeholder="Email" required type="email" /><br />
                     <input class="input" id="pass" name="password" placeholder="Password" required type="password" minlength="8" /><br />
