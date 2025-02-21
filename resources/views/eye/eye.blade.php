@@ -74,7 +74,749 @@
 
 
 <style>
-  #loader,html{box-sizing:border-box}#grid_flex,#warn_container{display:flex}html{--active_color:#a36700;overflow:hidden;position:fixed}*,:after,:before{box-sizing:inherit}body{background-color:#000;font-family:Montserrat,Verdana,sans-serif;font-weight:500;margin:0;padding:0}.back_videos{animation:3s ease-in forwards reveal;height:100vh;min-height:100%;min-width:100%;object-fit:cover;opacity:0;position:fixed;width:100vw;z-index:-1}@keyframes reveal{10%{opacity:.1}30%{opacity:.3}60%{opacity:.6}to{opacity:1}}#grid_form{animation:3s ease-in forwards grid_anime;background-color:rgba(0,0,0,.55);display:grid;grid-template:1fr min(100vh,100vw) 3fr/2fr 1fr 2fr;opacity:0;place-items:center;margin-top:-8rem;grid-template-areas:". logo ." ". fluid ." ". . ."}@keyframes grid_anime{0%,55%{opacity:0}to{opacity:1}}#grid_flex{flex-shrink:0;flex-wrap:wrap;grid-area:fluid}#logo{grid-area:logo;height:auto;margin-top:clamp(15%,30%,20%);padding-bottom:25%;width:clamp(15%,30%,45%)}#form{background-color:rgba(0,0,0,.65);border-radius:5px;margin-bottom:70%;padding-inline:min(5vh,5vw);padding-top:0}button:active,button:focus,button_login:active,button_login:focus,input:active,input:focus{outline:0}.input{background-color:transparent;border:none;color:#fff;font-size:clamp(1rem, 1.5vw, 2rem);margin-block:8%;text-align:center;width:clamp(25rem,25vw,25vh)}.input:hover{border-bottom:2px solid var(--active_color);border-top:2px solid var(--active_color);padding-block:3%;transition:.25s}.input:not(:active),.input:not(:hover){padding-block:-3%;transition:.2s}.input:active{padding-block:3%;transition:.25s}.input:focus,.input:focus-within{background-color:#000;border-radius:5px;border:2px solid var(--active_color);padding-block:3%;text-align:left;transition:.2s}.input:focus-within:hover{animation:none}.input:focus-within:not(:hover){padding-block:2%}.input:not(:focus-within){text-align:center}#button{background-color:#fff;border-radius:5px;border:none;color:#000;font-size:clamp(.86rem, 1.11vw, 2rem);height:clamp(2.5rem,2.5vw,5.5rem);margin-bottom:5%;margin-left:40.5%;margin-top:10%;width:clamp(5rem,5vw,7rem)}#button:active,#button:focus,#button:hover,#button:visited,#button_login:active,#button_login:focus,#button_login:hover,#button_login:visited{background-color:var(--active_color);text-decoration:none}#warning,#warning2,#warning3,#warning4,#warning5,#warning_incorrect_password{height:5rem;transform:translateY(-100%);width:30%;z-index:999;opacity:.75}#warning2,#warning3,#warning4,#warning5,#warning_incorrect_password{margin-left:1.5rem}.show_warning{animation:2s both warning_animation}.hide_warning{animation:2s both warning_animation_retract}@keyframes warning_animation{0%{transform:translateY(-100%)}to{transform:translateY(3%)}}@media only screen and (max-width:900px) and (min-width:740px){#warning,#warning2,#warning3,#warning4,#warning5,#warning_incorrect_password{height:6rem}#grid_form{margin-top:-10rem}@keyframes warning_animation{0%{transform:translateY(-110%)}to{transform:translateY(3%)}}}@keyframes warning_animation_retract{0%{transform:translateY(3%)}to{transform:translateY(-110%)}}@media only screen and (max-width:740px) and (min-width:650px){#warning,#warning2,#warning3,#warning4,#warning5,#warning_incorrect_password{height:7.5rem;transform:translateY(-110%)}#grid_form{margin-top:-12rem}}@media only screen and (max-width:650px) and (min-width:500px){#warning,#warning2,#warning3,#warning4,#warning5,#warning_incorrect_password{height:9rem;transform:translateY(-105%)}#grid_form{margin-top:-14rem}@keyframes warning_animation{0%{transform:translateY(-105%)}to{transform:translateY(3%)}}@keyframes warning_animation_retract{0%{transform:translateY(3%)}to{transform:translateY(-105%)}}}@media only screen and (max-width:600px) and (min-width:550px){#grid_form{margin-right:1rem}}@media only screen and (max-width:550px) and (min-width:500px){#grid_form{margin-right:3rem}}@media only screen and (max-width:500px){#grid_form{margin-right:3rem;scale:.9;position:relative;right:2rem;bottom:2rem}}@media only screen and (max-width:500px) and (min-width:430px){#form{padding-top:3%;padding-inline:min(10vh,10vw)}.input{width:clamp(20rem,20vw,20vh)}#button{margin-left:38%;width:clamp(4.5rem,4.5vw,4.5rem);height:clamp(2rem,2vw,2rem)}#warning,#warning2,#warning3,#warning4,#warning5,#warning_incorrect_password{height:10rem;transform:translateY(-110%)}#grid_form{margin-top:-14rem}@keyframes warning_animation{0%{transform:translateY(-110%)}to{transform:translateY(3%)}}@keyframes warning_animation_retract{0%{transform:translateY(3%)}to{transform:translateY(-110%)}}}@media only screen and (max-width:429px) and (min-width:345px){#form,#logo{right:0;position:relative}#logo{margin-top:0;top:65vw}#form{margin:0;padding-inline:min(10vh,10vw);padding-top:3%;transform:scale(.7);text-align:center;top:40vw}.input{width:clamp(17rem,17vw,17vh)}#button{height:clamp(2rem,2vw,2rem);margin-bottom:5%;margin-inline:37%;margin-top:12%;width:clamp(4.5rem,4.5vw,4.5rem)}#warning,#warning2,#warning3,#warning4,#warning5,#warning_incorrect_password{transform:translateY(-120%);font-size:1ch;line-height:1.6ch}}@media only screen and (max-height:510px) and (min-height:435px){#logo{margin-top:clamp(20%,20%,20%)}#form{padding-inline:min(10vh,10vw);padding-top:3%;margin-bottom:80%}.input{width:clamp(20rem,20vw,20vh)}#button{height:clamp(2rem,2vw,2rem);margin-left:38%;width:clamp(4.5rem,4.5vw,4.5rem)}}@media only screen and (max-height:434px) and (min-height:385px){#logo{margin-top:clamp(12%,12%,12%);height:80%;width:30%}#form{margin-bottom:68%;padding-inline:min(10vh,10vw);padding-top:2%}.input{width:clamp(20rem,20vw,20vh)}#button{height:clamp(2rem,2vw,2rem);margin-bottom:1%;margin-left:38%;width:clamp(4.5rem,4.5vw,4.5rem)}}@media only screen and (max-height:384px) and (min-height:320px){#logo{margin-top:clamp(9%,9%,9%);height:76%;width:25%}#form{margin-bottom:60%;padding-inline:min(10vh,10vw);padding-top:0}.input{width:clamp(20rem,20vw,20vh)}#button{height:clamp(2rem,2vw,2rem);margin-bottom:1%;margin-left:38%;width:clamp(4.5rem,4.5vw,4.5rem)}}@media only screen and (max-height:319px) and (min-height:260px){#logo{margin-top:clamp(9%,9%,9%);height:76%;width:25%}#form{margin-bottom:60%;padding-inline:min(10vh,10vw);padding-top:0}.input{width:clamp(15rem,15vw,15vh)}#button{height:clamp(1.5rem,1.5vw,1.5rem);margin-bottom:1%;margin-left:37%;width:clamp(4rem,4vw,4rem)}}@media only screen and (max-height:260px){#logo{margin-top:clamp(20%,20%,20%);height:70%;width:35%}#form{margin-bottom:68%;padding-inline:min(10vh,10vw);padding-top:2%}.input{width:clamp(10rem,10vw,10vh)}#button{height:clamp(1.5rem,1.5vw,1.5rem);margin-bottom:5%;margin-left:28%;width:clamp(4.5rem,4.5vw,4.5rem)}}#loader{width:16px;height:16px;border-radius:50%;display:block;margin:15px auto;position:relative;background:#fff;box-shadow:-24px 0 #fff,24px 0 #fff;animation:2s linear infinite loading}#loader_div{display:none;padding-block:100px;padding-inline:150px}@keyframes loading{33%{background:#fff;box-shadow:-24px 0 #ff3d00,24px 0 #fff}66%{background:#ff3d00;box-shadow:-24px 0 #fff,24px 0 #fff}to{background:#fff;box-shadow:-24px 0 #fff,24px 0 #ff3d00}}#creator{bottom:1rem;display:none;font-size:14px;margin-left:1rem}#creator a{text-decoration:none}#creator a:hover{filter:contrast(35%)}
+    #loader,
+    html {
+        box-sizing: border-box
+    }
+
+    #grid_flex,
+    #warn_container {
+        display: flex
+    }
+
+    html {
+        --active_color: #a36700;
+        overflow: hidden;
+        position: fixed
+    }
+
+    *,
+    :after,
+    :before {
+        box-sizing: inherit
+    }
+
+    body {
+        background-color: #000;
+        font-family: Montserrat, Verdana, sans-serif;
+        font-weight: 500;
+        margin: 0;
+        padding: 0
+    }
+
+    .back_videos {
+        animation: 3s ease-in forwards reveal;
+        height: 100vh;
+        min-height: 100%;
+        min-width: 100%;
+        object-fit: cover;
+        opacity: 0;
+        position: fixed;
+        width: 100vw;
+        z-index: -1
+    }
+
+    @keyframes reveal {
+        10% {
+            opacity: .1
+        }
+
+        30% {
+            opacity: .3
+        }
+
+        60% {
+            opacity: .6
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    #grid_form {
+        animation: 3s ease-in forwards grid_anime;
+        background-color: rgba(0, 0, 0, .55);
+        display: grid;
+        grid-template: 1fr min(100vh, 100vw) 3fr/2fr 1fr 2fr;
+        opacity: 0;
+        place-items: center;
+        margin-top: -8rem;
+        grid-template-areas: ". logo ." ". fluid ." ". . ."
+    }
+
+    @keyframes grid_anime {
+
+        0%,
+        55% {
+            opacity: 0
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    #grid_flex {
+        flex-shrink: 0;
+        flex-wrap: wrap;
+        grid-area: fluid
+    }
+
+    #logo {
+        grid-area: logo;
+        height: auto;
+        margin-top: clamp(15%, 30%, 20%);
+        padding-bottom: 25%;
+        width: clamp(15%, 30%, 45%)
+    }
+
+    #form {
+        background-color: rgba(0, 0, 0, .65);
+        border-radius: 5px;
+        margin-bottom: 70%;
+        padding-inline: min(5vh, 5vw);
+        padding-top: 0
+    }
+
+    button:active,
+    button:focus,
+    button_login:active,
+    button_login:focus,
+    input:active,
+    input:focus {
+        outline: 0
+    }
+
+    .input {
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        font-size: clamp(1rem, 1.5vw, 2rem);
+        margin-block: 8%;
+        text-align: center;
+        width: clamp(25rem, 25vw, 25vh)
+    }
+
+    .input:hover {
+        border-bottom: 2px solid var(--active_color);
+        border-top: 2px solid var(--active_color);
+        padding-block: 3%;
+        transition: .25s
+    }
+
+    .input:not(:active),
+    .input:not(:hover) {
+        padding-block: -3%;
+        transition: .2s
+    }
+
+    .input:active {
+        padding-block: 3%;
+        transition: .25s
+    }
+
+    .input:focus,
+    .input:focus-within {
+        background-color: #000;
+        border-radius: 5px;
+        border: 2px solid var(--active_color);
+        padding-block: 3%;
+        text-align: left;
+        transition: .2s
+    }
+
+    .input:focus-within:hover {
+        animation: none
+    }
+
+    .input:focus-within:not(:hover) {
+        padding-block: 2%
+    }
+
+    .input:not(:focus-within) {
+        text-align: center
+    }
+
+    #button {
+        background-color: #fff;
+        border-radius: 5px;
+        border: none;
+        color: #000;
+        font-size: clamp(.86rem, 1.11vw, 2rem);
+        height: clamp(2.5rem, 2.5vw, 5.5rem);
+        margin-bottom: 5%;
+        margin-left: 40.5%;
+        margin-top: 10%;
+        width: clamp(5rem, 5vw, 7rem)
+    }
+
+    #button:active,
+    #button:focus,
+    #button:hover,
+    #button:visited,
+    #button_login:active,
+    #button_login:focus,
+    #button_login:hover,
+    #button_login:visited {
+        background-color: var(--active_color);
+        text-decoration: none
+    }
+
+    #warning,
+    #warning2,
+    #warning3,
+    #warning4,
+    #warning5,
+    #warning_incorrect_password {
+        height: 5rem;
+        transform: translateY(-100%);
+        width: 30%;
+        z-index: 999;
+        opacity: .75
+    }
+
+    #warning2,
+    #warning3,
+    #warning4,
+    #warning5,
+    #warning_incorrect_password {
+        margin-left: 1.5rem
+    }
+
+    .show_warning {
+        animation: 2s both warning_animation
+    }
+
+    .hide_warning {
+        animation: 2s both warning_animation_retract
+    }
+
+    @keyframes warning_animation {
+        0% {
+            transform: translateY(-100%)
+        }
+
+        to {
+            transform: translateY(3%)
+        }
+    }
+
+    @media only screen and (max-width:900px) and (min-width:740px) {
+
+        #warning,
+        #warning2,
+        #warning3,
+        #warning4,
+        #warning5,
+        #warning_incorrect_password {
+            height: 6rem
+        }
+
+        #grid_form {
+            margin-top: -10rem
+        }
+
+        @keyframes warning_animation {
+            0% {
+                transform: translateY(-110%)
+            }
+
+            to {
+                transform: translateY(3%)
+            }
+        }
+    }
+
+    @keyframes warning_animation_retract {
+        0% {
+            transform: translateY(3%)
+        }
+
+        to {
+            transform: translateY(-110%)
+        }
+    }
+
+    @media only screen and (max-width:740px) and (min-width:650px) {
+
+        #warning,
+        #warning2,
+        #warning3,
+        #warning4,
+        #warning5,
+        #warning_incorrect_password {
+            height: 7.5rem;
+            transform: translateY(-110%)
+        }
+
+        #grid_form {
+            margin-top: -12rem
+        }
+    }
+
+    @media only screen and (max-width:650px) and (min-width:500px) {
+
+        #warning,
+        #warning2,
+        #warning3,
+        #warning4,
+        #warning5,
+        #warning_incorrect_password {
+            height: 9rem;
+            transform: translateY(-105%)
+        }
+
+        #grid_form {
+            margin-top: -14rem
+        }
+
+        @keyframes warning_animation {
+            0% {
+                transform: translateY(-105%)
+            }
+
+            to {
+                transform: translateY(3%)
+            }
+        }
+
+        @keyframes warning_animation_retract {
+            0% {
+                transform: translateY(3%)
+            }
+
+            to {
+                transform: translateY(-105%)
+            }
+        }
+    }
+
+    @media only screen and (max-width:600px) and (min-width:550px) {
+        #grid_form {
+            margin-right: 1rem
+        }
+    }
+
+    @media only screen and (max-width:550px) and (min-width:500px) {
+        #grid_form {
+            margin-right: 3rem
+        }
+    }
+
+    @media only screen and (max-width:500px) {
+        #grid_form {
+            margin-right: 3rem;
+            scale: .9;
+            position: relative;
+            right: 2rem;
+            bottom: 2rem
+        }
+    }
+
+    @media only screen and (max-width:500px) and (min-width:430px) {
+        #form {
+            padding-top: 3%;
+            padding-inline: min(10vh, 10vw)
+        }
+
+        .input {
+            width: clamp(20rem, 20vw, 20vh)
+        }
+
+        #button {
+            margin-left: 38%;
+            width: clamp(4.5rem, 4.5vw, 4.5rem);
+            height: clamp(2rem, 2vw, 2rem)
+        }
+
+        #warning,
+        #warning2,
+        #warning3,
+        #warning4,
+        #warning5,
+        #warning_incorrect_password {
+            height: 10rem;
+            transform: translateY(-110%)
+        }
+
+        #grid_form {
+            margin-top: -14rem
+        }
+
+        @keyframes warning_animation {
+            0% {
+                transform: translateY(-110%)
+            }
+
+            to {
+                transform: translateY(3%)
+            }
+        }
+
+        @keyframes warning_animation_retract {
+            0% {
+                transform: translateY(3%)
+            }
+
+            to {
+                transform: translateY(-110%)
+            }
+        }
+    }
+
+    @media only screen and (max-width:429px) and (min-width:345px) {
+
+        #form,
+        #logo {
+            right: 0;
+            position: relative
+        }
+
+        #logo {
+            margin-top: 0;
+            top: 65vw
+        }
+
+        #form {
+            margin: 0;
+            padding-inline: min(10vh, 10vw);
+            padding-top: 3%;
+            transform: scale(.7);
+            text-align: center;
+            top: 40vw
+        }
+
+        .input {
+            width: clamp(17rem, 17vw, 17vh)
+        }
+
+        #button {
+            height: clamp(2rem, 2vw, 2rem);
+            margin-bottom: 5%;
+            margin-inline: 37%;
+            margin-top: 12%;
+            width: clamp(4.5rem, 4.5vw, 4.5rem)
+        }
+
+        #warning,
+        #warning2,
+        #warning3,
+        #warning4,
+        #warning5,
+        #warning_incorrect_password {
+            transform: translateY(-120%);
+            font-size: 1ch;
+            line-height: 1.6ch
+        }
+    }
+
+    @media only screen and (max-height:510px) and (min-height:435px) {
+        #logo {
+            margin-top: clamp(20%, 20%, 20%)
+        }
+
+        #form {
+            padding-inline: min(10vh, 10vw);
+            padding-top: 3%;
+            margin-bottom: 80%
+        }
+
+        .input {
+            width: clamp(20rem, 20vw, 20vh)
+        }
+
+        #button {
+            height: clamp(2rem, 2vw, 2rem);
+            margin-left: 38%;
+            width: clamp(4.5rem, 4.5vw, 4.5rem)
+        }
+    }
+
+    @media only screen and (max-height:434px) and (min-height:385px) {
+        #logo {
+            margin-top: clamp(12%, 12%, 12%);
+            height: 80%;
+            width: 30%
+        }
+
+        #form {
+            margin-bottom: 68%;
+            padding-inline: min(10vh, 10vw);
+            padding-top: 2%
+        }
+
+        .input {
+            width: clamp(20rem, 20vw, 20vh)
+        }
+
+        #button {
+            height: clamp(2rem, 2vw, 2rem);
+            margin-bottom: 1%;
+            margin-left: 38%;
+            width: clamp(4.5rem, 4.5vw, 4.5rem)
+        }
+    }
+
+    @media only screen and (max-height:384px) and (min-height:320px) {
+        #logo {
+            margin-top: clamp(9%, 9%, 9%);
+            height: 76%;
+            width: 25%
+        }
+
+        #form {
+            margin-bottom: 60%;
+            padding-inline: min(10vh, 10vw);
+            padding-top: 0
+        }
+
+        .input {
+            width: clamp(20rem, 20vw, 20vh)
+        }
+
+        #button {
+            height: clamp(2rem, 2vw, 2rem);
+            margin-bottom: 1%;
+            margin-left: 38%;
+            width: clamp(4.5rem, 4.5vw, 4.5rem)
+        }
+    }
+
+    @media only screen and (max-height:319px) and (min-height:260px) {
+        #logo {
+            margin-top: clamp(9%, 9%, 9%);
+            height: 76%;
+            width: 25%
+        }
+
+        #form {
+            margin-bottom: 60%;
+            padding-inline: min(10vh, 10vw);
+            padding-top: 0
+        }
+
+        .input {
+            width: clamp(15rem, 15vw, 15vh)
+        }
+
+        #button {
+            height: clamp(1.5rem, 1.5vw, 1.5rem);
+            margin-bottom: 1%;
+            margin-left: 37%;
+            width: clamp(4rem, 4vw, 4rem)
+        }
+    }
+
+    @media only screen and (max-height:260px) {
+        #logo {
+            margin-top: clamp(20%, 20%, 20%);
+            height: 70%;
+            width: 35%
+        }
+
+        #form {
+            margin-bottom: 68%;
+            padding-inline: min(10vh, 10vw);
+            padding-top: 2%
+        }
+
+        .input {
+            width: clamp(10rem, 10vw, 10vh)
+        }
+
+        #button {
+            height: clamp(1.5rem, 1.5vw, 1.5rem);
+            margin-bottom: 5%;
+            margin-left: 28%;
+            width: clamp(4.5rem, 4.5vw, 4.5rem)
+        }
+    }
+
+    #loader {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: block;
+        margin: 15px auto;
+        position: relative;
+        background: #fff;
+        box-shadow: -24px 0 #fff, 24px 0 #fff;
+        animation: 2s linear infinite loading
+    }
+
+    #loader_div {
+        display: none;
+        padding-block: 100px;
+        padding-inline: 150px
+    }
+
+    @keyframes loading {
+        33% {
+            background: #fff;
+            box-shadow: -24px 0 #ff3d00, 24px 0 #fff
+        }
+
+        66% {
+            background: #ff3d00;
+            box-shadow: -24px 0 #fff, 24px 0 #fff
+        }
+
+        to {
+            background: #fff;
+            box-shadow: -24px 0 #fff, 24px 0 #ff3d00
+        }
+    }
+
+    #creator {
+        bottom: 1rem;
+        display: none;
+        font-size: 14px;
+        margin-left: 1rem
+    }
+
+    #creator a {
+        text-decoration: none
+    }
+
+    #creator a:hover {
+        filter: contrast(35%)
+    }
 </style>
 
-<script>$(document).ready((function () { let e = !1, t = $("#pass"), n = /[a-z]/, a = /[A-Z]/, r = /[0-9]/, s = /[α-ω]/, o = /[Α-Ω]/, i = /[ά-ώ]/, c = /[Ά-Ώ]/, d = /[!@#$%^&*(),.?":{}|<>]/; function u(t) { var n; (n = t).removeClass("hide_warning"), n.addClass("show_warning"), e = !0, t.on("animationend", (function () { setTimeout((function () { t.addClass("hide_warning").removeClass("show_warning") }), 4500) })) } setTimeout((function () { $("#cookie-info").fadeIn(2e3), $("#creator").fadeIn(2e3) }), 2500), setTimeout((function () { $("#cookie-info").fadeOut(1e3) }), 8e3), $("#button").click((async function (e) { e.preventDefault(); let l = t.val(), f = $("#email").val(); if ($(".warning-banner").hide(), f && l) try { var w; await (w = f, new Promise(((e, t) => { $.ajax({ url: "/check-user", method: "POST", data: { email: w }, headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") }, success: function (t) { t.exists ? e(!0) : e(!1) }, error: function (e, n, a) { t(!1) } }) }))) ? $.ajax({ beforeSend: function () { $("#email").fadeOut(500), $("#pass").fadeOut(500), setTimeout((function () { $("#loader_div").fadeIn(1500) }), 500) }, url: "/login", method: "POST", data: { email: f, password: l, _token: $('meta[name="csrf-token"]').attr("content") }, success: function (e) { "error" === e.status ? (u($("#warning_incorrect_password")), record_fail(f)) : "success" === e.status ? (localStorage.removeItem(`block_${f}`), window.location.href = e.redirect_url || "/logged") : (u($("#warning_incorrect_password")), record_fail(f)) }, error: function (e, t, n) { u($("#warning_incorrect_password")), record_fail(f) } }) : (n.test(l) || u($("#warning")), r.test(l) || u($("#warning2")), a.test(l) || u($("#warning3")), d.test(l) || u($("#warning4")), (s.test(l) || o.test(l) || i.test(l) || c.test(l)) && u($("#warning5")), a.test(l) && r.test(l) && n.test(l) && d.test(l) && !s.test(l) && !o.test(l) && !i.test(l) && !c.test(l) && $.ajax({ url: "/signup", method: "POST", data: { email: f, password: l }, headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") }, success: function (e) { "success" === e.status ? window.location.href = e.redirect_url || "/logged" : u($("#warning_incorrect_password")) }, error: function () { u($("#warning_incorrect_password")) } })) } catch (e) { u($("#warning_incorrect_password")) } else alert("Please fill in both the email and password fields.") })) }));</script>
+<script>
+    $(document).ready(function() {
+        let e = false,
+            t = $("#pass"),
+            n = /[a-z]/,
+            a = /[A-Z]/,
+            r = /[0-9]/,
+            s = /[α-ω]/,
+            o = /[Α-Ω]/,
+            i = /[ά-ώ]/,
+            c = /[Ά-Ώ]/,
+            d = /[!@#$%^&*(),.?":{}|<>]/;
+
+        // Function to show warnings
+        function u(t) {
+            t.removeClass("hide_warning").addClass("show_warning");
+            e = true;
+            t.on("animationend", function() {
+                setTimeout(function() {
+                    t.addClass("hide_warning").removeClass("show_warning");
+                }, 4500);
+            });
+        }
+
+        // Ensure the element is in the DOM before calling fadeIn()
+        $(window).on("load", function() {
+            setTimeout(function() {
+                $("#cookie-info").fadeIn(2000); // Fade in the cookie info
+                $("#creator").fadeIn(2000); // Fade in the creator info
+            }, 2500); // Delay before fade-in
+        });
+
+        setTimeout(function() {
+            $("#cookie-info").fadeOut(1000); // Fade out cookie info after 8 seconds
+        }, 8000);
+
+        $("#button").click(async function(e) {
+            e.preventDefault();
+            let l = t.val(),
+                f = $("#email").val();
+
+            if ($(".warning-banner").hide(), f && l) {
+                try {
+                    // Check user existence and perform actions accordingly
+                    let userExists = await checkUser(f);
+                    if (userExists) {
+                        // If user exists, try to login
+                        loginUser(f, l);
+                    } else {
+                        // If user doesn't exist, try to sign up
+                        signupUser(f, l);
+                    }
+                } catch (error) {
+                    u($("#warning_incorrect_password"));
+                }
+            } else {
+                alert("Please fill in both the email and password fields.");
+            }
+        });
+
+        // Check user existence
+        async function checkUser(email) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: "/check-user",
+                    method: "POST",
+                    data: {
+                        email: email
+                    },
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                    },
+                    success: function(response) {
+                        resolve(response.exists);
+                    },
+                    error: function() {
+                        reject(false);
+                    }
+                });
+            });
+        }
+
+        // Login user
+        function loginUser(email, password) {
+            $.ajax({
+                beforeSend: function() {
+                    $("#email").fadeOut(500);
+                    $("#pass").fadeOut(500);
+                    setTimeout(function() {
+                        $("#loader_div").fadeIn(1500);
+                    }, 500);
+                },
+                url: "/login",
+                method: "POST",
+                data: {
+                    email: email,
+                    password: password,
+                    _token: $('meta[name="csrf-token"]').attr("content")
+                },
+                success: function(response) {
+                    if (response.status === "error") {
+                        u($("#warning_incorrect_password"));
+                    } else if (response.status === "success") {
+                        window.location.href = response.redirect_url || "/logged";
+                    }
+                },
+                error: function() {
+                    u($("#warning_incorrect_password"));
+                }
+            });
+        }
+
+        // Signup user
+        function signupUser(email, password) {
+            $.ajax({
+                url: "/signup",
+                method: "POST",
+                data: {
+                    email: email,
+                    password: password,
+                    _token: $('meta[name="csrf-token"]').attr("content")
+                },
+                success: function(response) {
+                    if (response.status === "success") {
+                        window.location.href = response.redirect_url || "/logged";
+                    } else {
+                        u($("#warning_incorrect_password"));
+                    }
+                },
+                error: function() {
+                    u($("#warning_incorrect_password"));
+                }
+            });
+        }
+    });
+    </script>
