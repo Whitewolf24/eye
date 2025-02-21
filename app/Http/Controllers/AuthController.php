@@ -37,7 +37,7 @@ class AuthController extends Controller
         ],]);
         $user = User::create(['email' => $request->email, 'password' => Hash::make($request->password),]);
         Auth::login($user);
-        $cookie = cookie('oreo', 'user_logged_in', 43200, null, null, true, true);
+        $cookie = cookie()->make('oreo', 'user_logged_in', 43200, '/', null, true, true, false, 'Strict');
         return redirect()->route('logged')
             ->with('status', 'success')
             ->with('message', 'Successfully registered and logged in.')
@@ -49,7 +49,7 @@ class AuthController extends Controller
         $email = $request->email;
         if (Auth::attempt(['email' => $email, 'password' => $request->password])) {
             $request->session()->regenerate();
-            $cookie = cookie('oreo', 'user_logged_in', 43200, null, null, true, true);
+            $cookie = cookie()->make('oreo', 'user_logged_in', 43200, '/', null, true, true, false, 'Strict');
             return response()->json(['status' => 'success', 'message' => 'Successfully logged in.', 'redirect_url' => route('logged'),])->withCookie($cookie);
         }
         return response()->json(['status' => 'error', 'message' => 'Invalid credentials. Please try again.',], 400);
