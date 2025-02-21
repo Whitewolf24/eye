@@ -65,7 +65,7 @@
         <p>Created by<br> <a href="https://marinoscv.website/" class="text-warning">George Marinos </a>
         </p>
     </div>
-    <div id="cookie-info" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0.8); color: #fff; padding: 10px 20px; border-radius: 5px; z-index: 1000;">
+    <div id="cookie_info" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0.8); color: #fff; padding: 10px 20px; border-radius: 5px; z-index: 1000;">
         <p style="margin: 0; font-size: 14px; text-align: center;">We use cookies essential for login.</p>
     </div>
 </body>
@@ -74,6 +74,11 @@
 
 
 <style>
+    #cookie_info {
+        opacity: 0
+    }
+
+
     #loader,
     html {
         box-sizing: border-box
@@ -708,16 +713,21 @@
             });
         }
 
-        // Ensure the element is in the DOM before calling fadeIn()
         $(window).on("load", function() {
             setTimeout(function() {
-                $("#cookie-info").fadeIn(2000); // Fade in the cookie info
-                $("#creator").fadeIn(2000); // Fade in the creator info
-            }, 2500); // Delay before fade-in
+                $("#cookie_info").css({
+                    "opacity": 1,
+                    "transition": "opacity 2s ease-in-out"
+                });
+                $("#creator").fadeIn(2000);
+            }, 2500);
         });
 
         setTimeout(function() {
-            $("#cookie-info").fadeOut(1000); // Fade out cookie info after 8 seconds
+            $("#cookie_info").css({
+                "opacity": 0,
+                "transition": "opacity 2s ease-in-out"
+            });
         }, 8000);
 
         $("#button").click(async function(e) {
@@ -727,13 +737,10 @@
 
             if ($(".warning-banner").hide(), f && l) {
                 try {
-                    // Check user existence and perform actions accordingly
                     let userExists = await checkUser(f);
                     if (userExists) {
-                        // If user exists, try to login
                         loginUser(f, l);
                     } else {
-                        // If user doesn't exist, try to sign up
                         signupUser(f, l);
                     }
                 } catch (error) {
@@ -819,4 +826,4 @@
             });
         }
     });
-    </script>
+</script>
