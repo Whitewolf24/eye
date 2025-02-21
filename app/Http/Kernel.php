@@ -17,7 +17,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $routeMiddleware = [
+    protected $middleware = [
     \App\Http\Middleware\ContentSecurityPolicy::class
     ];
 

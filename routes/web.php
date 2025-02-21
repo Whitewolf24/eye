@@ -20,6 +20,7 @@ Route::post('/signup', [AuthController::class, 'register'])->name('signup');
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1')->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/check-user', [AuthController::class, 'check_user']);
+Route::post('/csp-violation-report-endpoint', [CSPReportController::class, 'handleReport']);
 
 Route::get('/login', function () {
     $user = Auth::user();
