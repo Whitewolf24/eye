@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 
 Route::post('/signup', [AuthController::class, 'register'])->name('signup');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1')->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/check-user', [AuthController::class, 'check_user']);
 
@@ -26,8 +26,7 @@ Route::get('/login', function () {
     if (!$user) {
         return redirect('/')->withErrors(['auth' => 'You are not logged in.']);
     }
-
-})->name('login'); 
+})->name('login');
 
 Route::get('/logged', function () {
     if (!Cookie::get('oreo')) {
@@ -39,4 +38,4 @@ Route::get('/logged', function () {
         return redirect('/')->withErrors(['auth' => 'You are not logged in.']);
     }
     return view('eye.logged', ['email' => $user->email]);
-})->name('logged'); 
+})->name('logged');
