@@ -38,7 +38,10 @@ class AuthController extends Controller
         $user = User::create(['email' => $request->email, 'password' => Hash::make($request->password),]);
         Auth::login($user);
         $cookie = cookie('oreo', 'user_logged_in', 43200, null, null, true, true);
-        return redirect()->route('logged')->withCookie($cookie);
+        return redirect()->route('logged')
+            ->with('status', 'success')
+            ->with('message', 'Successfully registered and logged in.')
+            ->withCookie($cookie);
     }
     public function login(Request $request)
     {
