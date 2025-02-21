@@ -184,7 +184,6 @@
                     _token: $('meta[name="csrf-token"]').attr("content")
                 },
                 success: function(response) {
-                    console.log('Login response:', response);
                     if (response.status === "error") {
                         u($("#warning_incorrect_password"));
                     } else if (response.status === "success") {

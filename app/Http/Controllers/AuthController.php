@@ -40,10 +40,10 @@ class AuthController extends Controller
 
         $cookie = cookie()->make('oreo', 'user_logged_in', 43200, '/', null, true, true, false, 'Strict');
 
-        return redirect()->route('logged')
-        ->with('status', 'success')
-        ->with('message', 'Successfully registered and logged in.')
-        ->withCookie($cookie);
+        return response()->json([
+            'status' => 'success',
+            'redirect_url' => route('logged')
+        ])->withCookie($cookie);
     }
 
     public function login(Request $request)
