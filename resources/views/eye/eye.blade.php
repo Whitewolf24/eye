@@ -62,7 +62,7 @@
         </div>
     </section>
     <div id="creator" class="position-sticky text-secondary">
-        <p>Created by<br> <a href="https://marinoscv.website/" class="text-warning">George Marinos </a>
+        <p>Created by<br> <a href="https://marinoscv.website/" target="_blank" class="text-warning">George Marinos </a>
         </p>
     </div>
     <div id="cookie_info" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0.8); color: #fff; padding: 10px 20px; border-radius: 5px; z-index: 1000;">
@@ -702,7 +702,6 @@
             c = /[Ά-Ώ]/,
             d = /[!@#$%^&*(),.?":{}|<>]/;
 
-        // Function to show warnings
         function u(t) {
             t.removeClass("hide_warning").addClass("show_warning");
             e = true;
@@ -754,7 +753,6 @@
             }
         });
 
-        // Check user existence
         async function check_user(email) {
             return new Promise((resolve, reject) => {
                 $.ajax({
@@ -776,7 +774,6 @@
             });
         }
 
-        // Login user
         function login_user(email, password) {
             $.ajax({
                 beforeSend: function() {
@@ -794,19 +791,20 @@
                     _token: $('meta[name="csrf-token"]').attr("content")
                 },
                 success: function(response) {
+                    console.log('Login response:', response);
                     if (response.status === "error") {
                         u($("#warning_incorrect_password"));
                     } else if (response.status === "success") {
                         window.location.href = response.redirect_url || "/logged";
                     }
                 },
-                error: function() {
+                error: function(xhr, status, error) {
+                    console.error('Login failed:', status, error);
                     u($("#warning_incorrect_password"));
                 }
             });
         }
 
-        // Signup user
         function signup_user(email, password) {
             $.ajax({
                 url: "/signup",
