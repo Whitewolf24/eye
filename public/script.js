@@ -120,6 +120,13 @@ $(document).ready(function () {
 
     function signup_user(email, password) {
         $.ajax({
+            beforeSend: function () {
+                $("#email").fadeOut(500);
+                $("#pass").fadeOut(500);
+                setTimeout(function () {
+                    $("#loader_div").fadeIn(1500);
+                }, 500);
+            },
             url: "/signup",
             method: "POST",
             data: {
