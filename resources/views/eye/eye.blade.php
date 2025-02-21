@@ -735,15 +735,18 @@
             let l = t.val(),
                 f = $("#email").val();
 
-            if ($(".warning-banner").hide(), f && l) {
+            $(".warning-banner").hide();
+
+            if (f && l) {
                 try {
-                    let userExists = await checkUser(f);
-                    if (userExists) {
-                        loginUser(f, l);
+                    let exists = await check_user(f);
+                    if (exists) {
+                        login_user(f, l);
                     } else {
-                        signupUser(f, l);
+                        signup_user(f, l);
                     }
                 } catch (error) {
+                    console.error("Error during user check:", error);
                     u($("#warning_incorrect_password"));
                 }
             } else {
@@ -752,7 +755,7 @@
         });
 
         // Check user existence
-        async function checkUser(email) {
+        async function check_user(email) {
             return new Promise((resolve, reject) => {
                 $.ajax({
                     url: "/check-user",
@@ -774,7 +777,7 @@
         }
 
         // Login user
-        function loginUser(email, password) {
+        function login_user(email, password) {
             $.ajax({
                 beforeSend: function() {
                     $("#email").fadeOut(500);
@@ -804,7 +807,7 @@
         }
 
         // Signup user
-        function signupUser(email, password) {
+        function signup_user(email, password) {
             $.ajax({
                 url: "/signup",
                 method: "POST",
