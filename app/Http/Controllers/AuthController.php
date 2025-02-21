@@ -49,7 +49,10 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::check() || Cookie::get('oreo') === 'user_logged_in') {
-            return redirect()->route('logged');
+            return response()->json([
+                'status' => 'success',
+                'redirect_url' => route('logged')
+            ]);
         }
 
         $request->validate([
@@ -57,32 +60,30 @@ class AuthController extends Controller
             'password' => 'required|min:8',
         ]);
 
-
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-
-            return redirect()->route('register')
-            ->with('status', 'error')
-                ->with('message', 'Email not found. Please register.');
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Email not found. Please register.'
+            ], 404);
         }
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
             $cookie = cookie()->make('oreo', 'user_logged_in', 43200, '/', null, true, true, false, 'Strict');
 
-            return redirect()->route('logged')
-            ->with('status', 'success')
-            ->with('message', 'Successfully logged in.')
-            ->withCookie($cookie);
+            return response()->json([
+                'status' => 'success',
+                'redirect_url' => route('logged')
+            ])->withCookie($cookie);
         }
 
-        return redirect()->route('login')
-            ->with('status', 'error')
-            ->with('message', 'Invalid credentials. Please try again.');
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Invalid credentials. Please try again.'
+        ], 401);
     }
-
-
 
     public function check_user(Request $request)
     {
