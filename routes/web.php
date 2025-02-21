@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-use App\Http\Middleware\CheckOreoCookie;
+use App\Http\Controllers\CSPReportController;
 
 
 // Serve the 'eye.blade.php' as root 
