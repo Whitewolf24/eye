@@ -18,8 +18,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        // Other middleware...
-      //  'CheckOreoCookie' => \App\Http\Middleware\CheckOreoCookie::class,  // Add your custom middleware here
+    \App\Http\Middleware\ContentSecurityPolicy::class
     ];
 
 }
